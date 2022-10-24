@@ -1,7 +1,7 @@
 # React-tac-toe
 
 ## Build something like this!
-![Tic-tac-toe Game](https://github.com/BranchMetrics/web-pair/blob/master/objective.png?raw=true)
+![Tic-tac-toe Game](https://github.com/grain-team/tic-tac-toe/blob/master/objective.png?raw=true)
 
 Extra points for making it look nice
 
