@@ -4,6 +4,7 @@
 ![Tic-tac-toe Game](https://github.com/grain-team/tic-tac-toe/blob/master/objective.png?raw=true)
 
 # Extra points
+- Use TypeScript
 - Make it look nice
 - Add modern tooling of your choice (linter, formatter, etc)
 - Save game data to LocalStorage
