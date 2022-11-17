@@ -4,22 +4,13 @@ import styles from "./Game.module.css";
 
 export const GameSquareBlock: FC<GameSquareBlockProps> = (props) => {
   const { value, winner, onClick } = props;
-
-  if (!value) {
-    return (
-      <button
-        className={styles.squareBlock}
-        onClick={onClick}
-        disabled={Boolean(winner)}
-      />
-    );
-  }
   return (
     <button
-      className={styles.squareBlock + " " + styles[`$squareBlockVariant`]}
-      disabled
+      className={styles.squareBlock}
+      onClick={value ? undefined : onClick}
+      disabled={value ? true : Boolean(winner)}
     >
-      {value}
+      {value && value}
     </button>
   );
 };

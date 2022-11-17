@@ -24,17 +24,10 @@ h1 {
 .squareBlock {
   width: 80px;
   height: 80px;
-  font-size: 5rem;
-  color: #e8e5e5;
+  font-size: 40px;
+  background-color: #ffffff;
   border: 1px solid #000;
-}
-
-.squareBlock_input_o {
-  background-color: rgb(87, 218, 21);
-}
-
-.squareBlock_input_x {
-  background-color: crimson;
+  color: #000;
 }
 
 .resetButton {
@@ -43,8 +36,8 @@ h1 {
   height: 53px;
   font-family: "Inter";
   font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
+  font-weight: 700;
+  font-size: 28px;
   text-align: center;
   color: #ffffff;
   background: #00b96c;
