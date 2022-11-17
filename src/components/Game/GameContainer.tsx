@@ -1,4 +1,5 @@
 import { useState, useEffect, FC } from "react";
+import Confetti from "react-confetti";
 import { GameSquareBlock } from "./GameSquareBlock";
 import { GamePlayerType } from "./types";
 import { calculateWinner } from "./helpers";
@@ -42,10 +43,24 @@ export const GameContainer: FC = () => {
   return (
     <div className={styles.gameMain}>
       <h1>Tic Tac Toe</h1>
-      {!winner && <p>Hey {currentPlayer}, it's your turn</p>}
-      {winner && winner !== "BOTH" && <p>Congratulations {winner}</p>}
+      {!winner && (
+        <p className={styles.showPlayerTurn}>
+          Hey {currentPlayer}, it's your turn
+        </p>
+      )}
+      {winner && winner !== "BOTH" && (
+        <>
+          <p className={styles.gameWinner}>Congratulations {winner}</p>
+          <Confetti numberOfPieces={300} recycle={false} tweenDuration={5000} />
+        </>
+      )}
       {winner && winner === "BOTH" && (
-        <p>Congratulations you're both winners</p>
+        <>
+          <p className={styles.gameWinner}>
+            Congratulations you're both winners
+          </p>
+          <Confetti numberOfPieces={300} recycle={false} tweenDuration={5000} />
+        </>
       )}
       <div className={styles.gameContainer}>
         {Array(9)

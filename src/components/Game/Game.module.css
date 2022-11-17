@@ -6,7 +6,7 @@ h1 {
   font-family: "Inter";
   font-size: 40px;
   font-weight: 600;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .gameContainer {
@@ -44,4 +44,24 @@ h1 {
   border-radius: 8px;
   border: none;
   margin-top: 30px;
+}
+
+.showPlayerTurn {
+  font-weight: 600;
+  font-family: "Inter";
+  font-size: 25px;
+  font-style: italic;
+}
+
+.gameWinner {
+  background-color: #00b96c;
+  width: 430px;
+  padding: 10px;
+  margin: auto;
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-style: italic;
+  font-weight: bold;
+  font-family: "Inter";
+  font-size: 25px;
 }
