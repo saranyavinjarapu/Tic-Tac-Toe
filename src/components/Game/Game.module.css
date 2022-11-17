@@ -1,0 +1,54 @@
+.gameMain {
+  text-align: center;
+}
+
+h1 {
+  font-family: "Inter";
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.gameContainer {
+  display: grid;
+  grid-gap: 1px;
+  grid-template-columns: repeat(3, 1fr);
+  width: 230px;
+  height: 230px;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  margin: auto;
+}
+
+.squareBlock {
+  width: 80px;
+  height: 80px;
+  font-size: 5rem;
+  color: #e8e5e5;
+  border: 1px solid #000;
+}
+
+.squareBlock_input_o {
+  background-color: rgb(87, 218, 21);
+}
+
+.squareBlock_input_x {
+  background-color: crimson;
+}
+
+.resetButton {
+  padding: 12px 40px;
+  width: 211px;
+  height: 53px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  text-align: center;
+  color: #ffffff;
+  background: #00b96c;
+  border-radius: 8px;
+  border: none;
+  margin-top: 30px;
+}
