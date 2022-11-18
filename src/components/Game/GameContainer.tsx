@@ -38,7 +38,7 @@ export const GameContainer: FC = () => {
     if (!winnerValue && !gameSquares.filter((square) => !square).length) {
       setWinner("BOTH");
     }
-  });
+  }, [gameSquares, setWinner]);
 
   return (
     <div className={styles.gameMain}>
