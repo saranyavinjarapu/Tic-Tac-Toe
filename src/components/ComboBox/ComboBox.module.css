@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   margin-top: 30px;
+  margin-bottom: 5px;
 }
 .selectBox .optionsContainer {
   background-color: #0d141fb3;
@@ -13,6 +14,7 @@
   border-radius: 8px;
   overflow: hidden;
   order: 1;
+  max-height: 0;
 }
 .selectBox .optionsContainerActive {
   background-color: #0d141fb3;

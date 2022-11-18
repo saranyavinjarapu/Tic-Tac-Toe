@@ -14,20 +14,13 @@
   margin-bottom: 20px;
 }
 
-.gameGrid {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .gameContainer {
   display: grid;
   grid-gap: 1px;
   grid-template-columns: repeat(3, 1fr);
   width: 230px;
   height: 230px;
-  margin-top: 20px;
+  margin-top: 10px;
   justify-content: center;
 }
 
@@ -67,8 +60,7 @@
   background-color: #00b96c;
   width: 430px;
   padding: 10px;
-  margin: auto;
-  margin-bottom: 20px;
+  margin-top: 40px;
   color: #ffffff;
   font-style: italic;
   font-weight: bold;

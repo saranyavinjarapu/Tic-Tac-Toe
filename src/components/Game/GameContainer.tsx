@@ -24,7 +24,7 @@ export const GameContainer: FC = () => {
   const [currentPlayer, setCurrentPlayer] = useState<"X" | "O">(
     Math.round(Math.random() * 1) === 1 ? "X" : "O"
   );
-  const gridSizeOptions = [3, 4, 5, 6];
+  const gridSizeOptions: number[] = [3, 4, 5, 6];
 
   const resetGame = (e: React.MouseEvent<HTMLButtonElement>) => {
     setGameSquares(Array(gridSize.gridSizeSquaresFill).fill(null));
@@ -65,11 +65,11 @@ export const GameContainer: FC = () => {
     <div className={styles.gameMain}>
       <div className={styles.gameInformation}>
         <h1>Tic Tac Toe</h1>
-        {!winner && (
-          <p className={styles.showPlayerTurn}>
-            Hey {currentPlayer}, it's your turn
-          </p>
-        )}
+        <ComboBox
+          comboOptions={gridSizeOptions}
+          comboName="Grid Size : 3 X 3"
+          onComboSelect={handleGridSizeSelect}
+        ></ComboBox>
         {winner && winner !== "BOTH" && (
           <>
             <p className={styles.gameWinner}>Congratulations {winner}</p>
@@ -96,7 +96,14 @@ export const GameContainer: FC = () => {
           Reset
         </button>
       </div>
+
       <div className={styles.gameGrid}>
+        {!winner && (
+          <p className={styles.showPlayerTurn}>
+            Hey {currentPlayer}, it's your turn
+          </p>
+        )}
+
         <div
           className={styles.gameContainer}
           style={{
@@ -116,11 +123,6 @@ export const GameContainer: FC = () => {
               );
             })}
         </div>
-        <ComboBox
-          comboOptions={gridSizeOptions}
-          comboName="Grid Size : 3 X 3"
-          onComboSelect={handleGridSizeSelect}
-        ></ComboBox>
       </div>
     </div>
   );
