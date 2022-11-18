@@ -26,7 +26,7 @@ export const GameContainer: FC = () => {
   );
   const gridSizeOptions: number[] = [3, 4, 5, 6];
 
-  const resetGame = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const resetGame = (e?: React.MouseEvent<HTMLButtonElement>) => {
     setGameSquares(Array(gridSize.gridSizeSquaresFill).fill(null));
     setWinner(null);
     setCurrentPlayer(Math.round(Math.random() * 1) === 1 ? "X" : "O");
@@ -48,6 +48,7 @@ export const GameContainer: FC = () => {
       gridSizeSquaresFill: gridSize * gridSize,
       gridSizeValue: gridSize,
     });
+    resetGame();
   };
 
   useEffect(() => {

@@ -34,8 +34,7 @@
 }
 
 .resetButton {
-  padding: 12px 40px;
-  width: 211px;
+  padding: 12px 30px;
   height: 53px;
   font-family: "Inter";
   font-style: normal;
@@ -46,7 +45,7 @@
   background: #00b96c;
   border-radius: 8px;
   border: none;
-  margin-top: 30px;
+  margin-top: 25px;
 }
 
 .showPlayerTurn {
@@ -58,9 +57,8 @@
 
 .gameWinner {
   background-color: #00b96c;
-  width: 430px;
   padding: 10px;
-  margin-top: 40px;
+  margin-top: 30px;
   color: #ffffff;
   font-style: italic;
   font-weight: bold;
