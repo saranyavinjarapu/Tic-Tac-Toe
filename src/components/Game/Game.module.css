@@ -14,13 +14,21 @@
   margin-bottom: 20px;
 }
 
+.gameGrid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .gameContainer {
   display: grid;
   grid-gap: 1px;
   grid-template-columns: repeat(3, 1fr);
-  min-width: 230px;
-  min-height: 230px;
-  margin-top: 30px;
+  width: 230px;
+  height: 230px;
+  margin-top: 20px;
+  justify-content: center;
 }
 
 .squareBlock {

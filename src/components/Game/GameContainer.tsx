@@ -1,5 +1,6 @@
 import { useState, useEffect, FC } from "react";
 import Confetti from "react-confetti";
+import { ComboBox } from "../ComboBox/ComboBox";
 import { GameSquareBlock } from "./GameSquareBlock";
 import { GamePlayerType } from "./types";
 import { calculateWinner } from "./helpers";
@@ -11,6 +12,7 @@ export const GameContainer: FC = () => {
   const [currentPlayer, setCurrentPlayer] = useState<"X" | "O">(
     Math.round(Math.random() * 1) === 1 ? "X" : "O"
   );
+  const gridSizeOptions = [3, 4, 5, 6];
 
   const resetGame = (e: React.MouseEvent<HTMLButtonElement>) => {
     setGameSquares(Array(9).fill(null));
@@ -42,7 +44,7 @@ export const GameContainer: FC = () => {
 
   return (
     <div className={styles.gameMain}>
-      <div>
+      <div className={styles.gameInformation}>
         <h1>Tic Tac Toe</h1>
         {!winner && (
           <p className={styles.showPlayerTurn}>
@@ -75,19 +77,25 @@ export const GameContainer: FC = () => {
           Reset
         </button>
       </div>
-      <div className={styles.gameContainer}>
-        {Array(9)
-          .fill(null)
-          .map((_, i) => {
-            return (
-              <GameSquareBlock
-                winner={winner}
-                key={i}
-                onClick={() => handleGameSquareInput(i)}
-                value={gameSquares[i]}
-              />
-            );
-          })}
+      <div className={styles.gameGrid}>
+        <div className={styles.gameContainer}>
+          {Array(9)
+            .fill(null)
+            .map((_, i) => {
+              return (
+                <GameSquareBlock
+                  winner={winner}
+                  key={i}
+                  onClick={() => handleGameSquareInput(i)}
+                  value={gameSquares[i]}
+                />
+              );
+            })}
+        </div>
+        <ComboBox
+          comboOptions={gridSizeOptions}
+          comboName="Grid Size : 3 X 3"
+        ></ComboBox>
       </div>
     </div>
   );
