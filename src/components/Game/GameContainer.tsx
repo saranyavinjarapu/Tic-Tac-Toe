@@ -6,8 +6,20 @@ import { GamePlayerType } from "./types";
 import { calculateWinner } from "./helpers";
 import styles from "./Game.module.css";
 
+type GridSizeProps = {
+  gridSizeSquaresFill: number;
+  gridSizeValue: number;
+};
+
 export const GameContainer: FC = () => {
-  const [gameSquares, setGameSquares] = useState(Array(9).fill(null));
+  const [gridSize, setGridSize] = useState<GridSizeProps>({
+    gridSizeSquaresFill: 9,
+    gridSizeValue: 3,
+  });
+
+  const [gameSquares, setGameSquares] = useState(
+    Array(gridSize.gridSizeSquaresFill).fill(null)
+  );
   const [winner, setWinner] = useState<GamePlayerType>(null);
   const [currentPlayer, setCurrentPlayer] = useState<"X" | "O">(
     Math.round(Math.random() * 1) === 1 ? "X" : "O"
@@ -15,7 +27,7 @@ export const GameContainer: FC = () => {
   const gridSizeOptions = [3, 4, 5, 6];
 
   const resetGame = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setGameSquares(Array(9).fill(null));
+    setGameSquares(Array(gridSize.gridSizeSquaresFill).fill(null));
     setWinner(null);
     setCurrentPlayer(Math.round(Math.random() * 1) === 1 ? "X" : "O");
   };
@@ -29,6 +41,13 @@ export const GameContainer: FC = () => {
     });
     setGameSquares(updatedGameSquares);
     setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
+  };
+
+  const handleGridSizeSelect = (gridSize: number) => {
+    setGridSize({
+      gridSizeSquaresFill: gridSize * gridSize,
+      gridSizeValue: gridSize,
+    });
   };
 
   useEffect(() => {
@@ -78,8 +97,13 @@ export const GameContainer: FC = () => {
         </button>
       </div>
       <div className={styles.gameGrid}>
-        <div className={styles.gameContainer}>
-          {Array(9)
+        <div
+          className={styles.gameContainer}
+          style={{
+            gridTemplateColumns: `repeat(${gridSize.gridSizeValue},1fr`,
+          }}
+        >
+          {Array(gridSize.gridSizeSquaresFill)
             .fill(null)
             .map((_, i) => {
               return (
@@ -95,6 +119,7 @@ export const GameContainer: FC = () => {
         <ComboBox
           comboOptions={gridSizeOptions}
           comboName="Grid Size : 3 X 3"
+          onComboSelect={handleGridSizeSelect}
         ></ComboBox>
       </div>
     </div>

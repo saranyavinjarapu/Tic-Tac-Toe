@@ -5,11 +5,11 @@ import arrowDropDown from "../../icons/arrow.svg";
 type ComboBoxProps = {
   comboOptions: Array<number>;
   comboName: string;
-  onSelect?: (value: string) => void;
+  onComboSelect?: (value: number) => void;
 };
 
 export const ComboBox: FC<ComboBoxProps> = (props) => {
-  const { comboOptions, comboName } = props;
+  const { comboOptions, comboName, onComboSelect } = props;
 
   const comboExpand = () => {
     var isComboBoxExpanded = document.getElementById("expandComboBoxArrow")!
@@ -32,6 +32,8 @@ export const ComboBox: FC<ComboBoxProps> = (props) => {
 
     document.querySelector("#comboValue")!.innerHTML =
       comboName.split("3")[0] + selectedValue;
+
+    onComboSelect!(parseInt(selectedValue.split("X")[0]));
 
     var currentComboBoxClass = document.getElementById("expandComboBoxArrow");
     var currentOptionsContainerClass =
