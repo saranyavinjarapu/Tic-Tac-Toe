@@ -1,8 +1,13 @@
 .gameMain {
   text-align: center;
+  display: flex;
+  margin: auto;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  width: 100%;
 }
 
-h1 {
+.gameMain .gameInformation h1 {
   font-family: "Inter";
   font-size: 40px;
   font-weight: 600;
@@ -13,12 +18,9 @@ h1 {
   display: grid;
   grid-gap: 1px;
   grid-template-columns: repeat(3, 1fr);
-  width: 230px;
-  height: 230px;
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
-  margin: auto;
+  min-width: 230px;
+  min-height: 230px;
+  margin-top: 30px;
 }
 
 .squareBlock {

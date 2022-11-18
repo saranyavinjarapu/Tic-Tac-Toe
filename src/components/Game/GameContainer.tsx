@@ -42,26 +42,39 @@ export const GameContainer: FC = () => {
 
   return (
     <div className={styles.gameMain}>
-      <h1>Tic Tac Toe</h1>
-      {!winner && (
-        <p className={styles.showPlayerTurn}>
-          Hey {currentPlayer}, it's your turn
-        </p>
-      )}
-      {winner && winner !== "BOTH" && (
-        <>
-          <p className={styles.gameWinner}>Congratulations {winner}</p>
-          <Confetti numberOfPieces={300} recycle={false} tweenDuration={5000} />
-        </>
-      )}
-      {winner && winner === "BOTH" && (
-        <>
-          <p className={styles.gameWinner}>
-            Congratulations you're both winners
+      <div>
+        <h1>Tic Tac Toe</h1>
+        {!winner && (
+          <p className={styles.showPlayerTurn}>
+            Hey {currentPlayer}, it's your turn
           </p>
-          <Confetti numberOfPieces={300} recycle={false} tweenDuration={5000} />
-        </>
-      )}
+        )}
+        {winner && winner !== "BOTH" && (
+          <>
+            <p className={styles.gameWinner}>Congratulations {winner}</p>
+            <Confetti
+              numberOfPieces={300}
+              recycle={false}
+              tweenDuration={5000}
+            />
+          </>
+        )}
+        {winner && winner === "BOTH" && (
+          <>
+            <p className={styles.gameWinner}>
+              Congratulations you're both winners
+            </p>
+            <Confetti
+              numberOfPieces={300}
+              recycle={false}
+              tweenDuration={5000}
+            />
+          </>
+        )}
+        <button className={styles.resetButton} onClick={resetGame}>
+          Reset
+        </button>
+      </div>
       <div className={styles.gameContainer}>
         {Array(9)
           .fill(null)
@@ -76,9 +89,6 @@ export const GameContainer: FC = () => {
             );
           })}
       </div>
-      <button className={styles.resetButton} onClick={resetGame}>
-        Reset
-      </button>
     </div>
   );
 };
