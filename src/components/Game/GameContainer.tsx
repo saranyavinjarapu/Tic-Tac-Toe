@@ -98,7 +98,7 @@ export const GameContainer: FC = () => {
         </button>
       </div>
 
-      <div className={styles.gameGrid}>
+      <div className={styles.gameContainer}>
         {!winner && (
           <p className={styles.showPlayerTurn}>
             Hey {currentPlayer}, it's your turn
@@ -106,7 +106,7 @@ export const GameContainer: FC = () => {
         )}
 
         <div
-          className={styles.gameContainer}
+          className={styles.gameGrid}
           style={{
             gridTemplateColumns: `repeat(${gridSize.gridSizeValue},1fr`,
           }}

@@ -14,7 +14,7 @@
   margin-bottom: 20px;
 }
 
-.gameContainer {
+.gameGrid {
   display: grid;
   grid-gap: 1px;
   grid-template-columns: repeat(3, 1fr);
