@@ -1,5 +1,17 @@
 import { GamePlayerType } from "./types";
-export const calculateWinner = (squares: GamePlayerType[]) => {
+
+const createBoardMatrix = (
+  squaresArray: GamePlayerType[] | any,
+  size: number
+) => {
+  var res: GamePlayerType[] = [];
+  for (var i = 0; i < squaresArray.length; i = i + size)
+    res.push(squaresArray.slice(i, i + size));
+  return res;
+};
+export const calculateWinner = (squares: GamePlayerType[], size: number) => {
+  createBoardMatrix(squares, size);
+
   const lines = [
     [0, 1, 2],
     [3, 4, 5],

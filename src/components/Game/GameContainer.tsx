@@ -48,11 +48,13 @@ export const GameContainer: FC = () => {
       gridSizeSquaresFill: gridSize * gridSize,
       gridSizeValue: gridSize,
     });
-    resetGame();
+    setGameSquares(Array(gridSize * gridSize).fill(null));
+    setWinner(null);
+    setCurrentPlayer(Math.round(Math.random() * 1) === 1 ? "X" : "O");
   };
 
   useEffect(() => {
-    const winnerValue = calculateWinner(gameSquares);
+    const winnerValue = calculateWinner(gameSquares, gridSize.gridSizeValue);
     if (winnerValue) {
       setWinner(winnerValue);
     }
@@ -60,7 +62,7 @@ export const GameContainer: FC = () => {
     if (!winnerValue && !gameSquares.filter((square) => !square).length) {
       setWinner("BOTH");
     }
-  }, [gameSquares, setWinner]);
+  }, [gameSquares, gridSize.gridSizeValue, setWinner]);
 
   return (
     <div className={styles.gameMain}>
