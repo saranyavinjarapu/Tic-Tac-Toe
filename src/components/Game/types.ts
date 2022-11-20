@@ -5,3 +5,7 @@ export type GameSquareBlockProps = {
   winner: GamePlayerType;
   onClick: () => void;
 };
+
+export type GameWinnerInfoProps = {
+  winner: GamePlayerType;
+};

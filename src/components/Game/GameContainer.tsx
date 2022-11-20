@@ -1,6 +1,6 @@
 import { useState, useEffect, FC } from "react";
-import Confetti from "react-confetti";
 import { ComboBox } from "../ComboBox/ComboBox";
+import { GameWinnerInfo } from "./GameWinnerInfo";
 import { GameSquareBlock } from "./GameSquareBlock";
 import { GamePlayerType } from "./types";
 import { calculateWinner } from "./helpers";
@@ -73,38 +73,19 @@ export const GameContainer: FC = () => {
           comboName="Grid Size : 3 X 3"
           onComboSelect={handleGridSizeSelect}
         ></ComboBox>
-        {winner && winner !== "BOTH" && (
-          <>
-            <p className={styles.gameWinner}>Congratulations {winner}</p>
-            <Confetti
-              numberOfPieces={300}
-              recycle={false}
-              tweenDuration={5000}
-            />
-          </>
-        )}
-        {winner && winner === "BOTH" && (
-          <>
-            <p className={styles.gameWinner}>
-              Congratulations you're both winners
-            </p>
-            <Confetti
-              numberOfPieces={300}
-              recycle={false}
-              tweenDuration={5000}
-            />
-          </>
-        )}
+        {winner && <GameWinnerInfo winner={winner}></GameWinnerInfo>}
         <button className={styles.resetButton} onClick={resetGame}>
           Reset
         </button>
       </div>
 
       <div className={styles.gameContainer}>
-        {!winner && (
+        {!winner ? (
           <p className={styles.showPlayerTurn}>
             Hey {currentPlayer}, it's your turn
           </p>
+        ) : (
+          <p className={styles.showPlayerTurn}>Game Over</p>
         )}
 
         <div
