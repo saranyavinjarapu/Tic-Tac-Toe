@@ -8,3 +8,7 @@
 .Header a {
   color: #000;
 }
+
+.Header h2 {
+  margin-left: 50px;
+}

@@ -6,19 +6,11 @@ import { GamePlayerType } from "./types";
 import { calculateWinner } from "./helpers";
 import styles from "./Game.module.css";
 
-type GridSizeProps = {
-  gridSizeSquaresFill: number;
-  gridSizeValue: number;
-};
-
 export const GameContainer: FC = () => {
-  const [gridSize, setGridSize] = useState<GridSizeProps>({
-    gridSizeSquaresFill: 9,
-    gridSizeValue: 3,
-  });
+  const [gridSize, setGridSize] = useState<number>(3);
 
   const [gameSquares, setGameSquares] = useState(
-    Array(gridSize.gridSizeSquaresFill).fill(null)
+    Array(gridSize * gridSize).fill(null)
   );
   const [winner, setWinner] = useState<GamePlayerType>(null);
   const [currentPlayer, setCurrentPlayer] = useState<"X" | "O">(
@@ -27,7 +19,7 @@ export const GameContainer: FC = () => {
   const gridSizeOptions: number[] = [3, 4, 5, 6];
 
   const resetGame = (e?: React.MouseEvent<HTMLButtonElement>) => {
-    setGameSquares(Array(gridSize.gridSizeSquaresFill).fill(null));
+    setGameSquares(Array(gridSize * gridSize).fill(null));
     setWinner(null);
     setCurrentPlayer(Math.round(Math.random() * 1) === 1 ? "X" : "O");
   };
@@ -44,17 +36,14 @@ export const GameContainer: FC = () => {
   };
 
   const handleGridSizeSelect = (gridSize: number) => {
-    setGridSize({
-      gridSizeSquaresFill: gridSize * gridSize,
-      gridSizeValue: gridSize,
-    });
+    setGridSize(gridSize);
     setGameSquares(Array(gridSize * gridSize).fill(null));
     setWinner(null);
     setCurrentPlayer(Math.round(Math.random() * 1) === 1 ? "X" : "O");
   };
 
   useEffect(() => {
-    const winnerValue = calculateWinner(gameSquares, gridSize.gridSizeValue);
+    const winnerValue = calculateWinner(gameSquares, gridSize);
     if (winnerValue) {
       setWinner(winnerValue);
     }
@@ -62,7 +51,7 @@ export const GameContainer: FC = () => {
     if (!winnerValue && !gameSquares.filter((square) => !square).length) {
       setWinner("BOTH");
     }
-  }, [gameSquares, gridSize.gridSizeValue, setWinner]);
+  }, [gameSquares, gridSize, setWinner]);
 
   return (
     <div className={styles.gameMain}>
@@ -79,22 +68,22 @@ export const GameContainer: FC = () => {
         </button>
       </div>
 
-      <div className={styles.gameContainer}>
+      <div className={styles.gameSection}>
         {!winner ? (
           <p className={styles.showPlayerTurn}>
             Hey {currentPlayer}, it's your turn
           </p>
         ) : (
-          <p className={styles.showPlayerTurn}>Game Over</p>
+          <p className={styles.gameOverStatus}>Game Over</p>
         )}
 
         <div
           className={styles.gameGrid}
           style={{
-            gridTemplateColumns: `repeat(${gridSize.gridSizeValue},1fr`,
+            gridTemplateColumns: `repeat(${gridSize},1fr`,
           }}
         >
-          {Array(gridSize.gridSizeSquaresFill)
+          {Array(gridSize * gridSize)
             .fill(null)
             .map((_, i) => {
               return (

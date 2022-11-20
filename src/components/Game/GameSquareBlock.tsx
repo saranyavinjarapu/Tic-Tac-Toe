@@ -6,7 +6,7 @@ export const GameSquareBlock: FC<GameSquareBlockProps> = (props) => {
   const { value, winner, onClick } = props;
   return (
     <button
-      className={styles.squareBlock}
+      className={styles.gameSquareBlock}
       onClick={value ? undefined : onClick}
       disabled={value ? true : Boolean(winner)}
     >
