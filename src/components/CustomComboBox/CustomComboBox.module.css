@@ -3,10 +3,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
-  margin-bottom: 5px;
 }
-.selectBox .optionsContainer {
+.selectBox .optionsContainer,
+.optionsContainerActive {
   background-color: #0d141fb3;
   color: #f5f6fa;
   opacity: 0;
@@ -17,13 +16,6 @@
   max-height: 0;
 }
 .selectBox .optionsContainerActive {
-  background-color: #0d141fb3;
-  color: #f5f6fa;
-  opacity: 0;
-  transition: all 0.4s;
-  border-radius: 8px;
-  overflow: hidden;
-  order: 1;
   max-height: 200px;
   opacity: 1;
   overflow-y: auto;
@@ -37,7 +29,6 @@
   display: flex;
   justify-content: space-between;
   vertical-align: middle;
-  margin-top: 10px;
   min-width: 130px;
 }
 

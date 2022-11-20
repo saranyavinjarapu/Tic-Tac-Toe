@@ -1,14 +1,14 @@
 import { FC } from "react";
-import styles from "./ComboBox.module.css";
+import styles from "./CustomComboBox.module.css";
 import arrowDropDown from "../../icons/arrow.svg";
 
-type ComboBoxProps = {
+type CustomComboBoxProps = {
   comboOptions: Array<number>;
   comboName: string;
   onComboSelect?: (value: number) => void;
 };
 
-export const ComboBox: FC<ComboBoxProps> = (props) => {
+export const CustomComboBox: FC<CustomComboBoxProps> = (props) => {
   const { comboOptions, comboName, onComboSelect } = props;
 
   const comboExpand = () => {
@@ -70,10 +70,8 @@ export const ComboBox: FC<ComboBoxProps> = (props) => {
         <span id="comboValue" className={styles.comboValue}>
           {comboName}
         </span>
-        <img src={arrowDropDown} alt="search icon" id="expandComboBoxArrow" />
+        <img src={arrowDropDown} alt="combo expand" id="expandComboBoxArrow" />
       </div>
     </div>
   );
 };
-
-export default ComboBox;

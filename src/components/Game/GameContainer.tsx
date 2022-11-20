@@ -1,5 +1,5 @@
 import { useState, useEffect, FC } from "react";
-import { ComboBox } from "../ComboBox/ComboBox";
+import { CustomComboBox } from "../CustomComboBox/CustomComboBox";
 import { GameWinnerInfo } from "./GameWinnerInfo";
 import { GameSquareBlock } from "./GameSquareBlock";
 import { GamePlayerType } from "./types";
@@ -55,20 +55,22 @@ export const GameContainer: FC = () => {
 
   return (
     <div className={styles.gameMain}>
-      <div className={styles.gameInformation}>
-        <h1>Tic Tac Toe</h1>
-        <ComboBox
+      <div className={styles.gameInformationSection}>
+        <div>
+          <h1>Tic Tac Toe</h1>
+        </div>
+        <CustomComboBox
           comboOptions={gridSizeOptions}
           comboName="Grid Size : 3 X 3"
           onComboSelect={handleGridSizeSelect}
-        ></ComboBox>
+        ></CustomComboBox>
         {winner && <GameWinnerInfo winner={winner}></GameWinnerInfo>}
         <button className={styles.resetButton} onClick={resetGame}>
           Reset
         </button>
       </div>
 
-      <div className={styles.gameSection}>
+      <div className={styles.gamePlaySection}>
         {!winner ? (
           <p className={styles.showPlayerTurn}>
             Hey {currentPlayer}, it's your turn
