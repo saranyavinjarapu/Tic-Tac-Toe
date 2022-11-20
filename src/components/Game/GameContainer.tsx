@@ -64,7 +64,6 @@ export const GameContainer: FC = () => {
           comboName="Grid Size : 3 X 3"
           onComboSelect={handleGridSizeSelect}
         ></CustomComboBox>
-        {winner && <GameWinnerInfo winner={winner}></GameWinnerInfo>}
         <button className={styles.resetButton} onClick={resetGame}>
           Reset
         </button>
@@ -76,7 +75,7 @@ export const GameContainer: FC = () => {
             Hey {currentPlayer}, it's your turn
           </p>
         ) : (
-          <p className={styles.gameOverStatus}>Game Over</p>
+          <GameWinnerInfo winner={winner}></GameWinnerInfo>
         )}
 
         <div

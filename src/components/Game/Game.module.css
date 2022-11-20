@@ -78,7 +78,7 @@
   padding: 12px 30px;
   height: 53px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 28px;
   text-align: center;
   color: #ffffff;
@@ -93,13 +93,6 @@
   font-style: italic;
 }
 
-.gameOverStatus {
-  font-weight: 600;
-  font-size: 25px;
-  font-style: italic;
-  margin-top: -30px;
-}
-
 @media (max-width: 850px) {
   .gameOverStatus {
     margin-top: 30px;
@@ -108,8 +101,8 @@
 
 .gameWinner {
   background-color: #00b96c;
-  padding: 10px;
-  margin-top: 30px;
+  padding: 8px 16px;
+  margin-top: 25px;
   color: #ffffff;
   font-style: italic;
   font-weight: bold;
