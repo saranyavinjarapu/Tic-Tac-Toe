@@ -1,7 +1,9 @@
 import { GameDataStorageType } from "../types";
 
+export const GAMEDATA_LOCAL_STORAGE_KEY = "game-data";
+
 export const GAMEDATA_LOCAL_STORAGE = () => {
-  if (!localStorage.getItem("game-data")) {
+  if (!localStorage.getItem(GAMEDATA_LOCAL_STORAGE_KEY)) {
     return {
       X: 0,
       O: 0,
@@ -9,6 +11,6 @@ export const GAMEDATA_LOCAL_STORAGE = () => {
     } as GameDataStorageType;
   }
   return JSON.parse(
-    localStorage.getItem("game-data") || "{}"
+    localStorage.getItem(GAMEDATA_LOCAL_STORAGE_KEY) || "{}"
   ) as GameDataStorageType;
 };
