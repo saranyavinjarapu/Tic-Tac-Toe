@@ -32,6 +32,12 @@
   min-width: 130px;
 }
 
+.comboBoxArrow,
+.comboBoxArrowExpanded {
+  width: 25px;
+  height: 25px;
+}
+
 .comboBoxArrowExpanded {
   transform: rotateX(-179deg);
   top: -8px;

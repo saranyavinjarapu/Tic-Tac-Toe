@@ -1,7 +1,8 @@
+import { FC } from "react";
 import styles from "./Header.module.css";
-import companyLogo from "../../images/grain_logo.svg";
+import companyLogo from "../../icons/grain_logo.svg";
 
-export const Header: React.FC = () => {
+export const Header: FC = () => {
   return (
     <div className={styles.Header}>
       <img src={companyLogo} alt="Grain Company Logo" />

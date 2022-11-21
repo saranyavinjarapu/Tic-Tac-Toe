@@ -1,52 +1,52 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import styles from "./CustomComboBox.module.css";
+import { CustomComboBoxProps, customComboExpandProps } from "./types";
 import arrowDropDown from "../../icons/arrow.svg";
 
-type CustomComboBoxProps = {
-  comboOptions: Array<number>;
-  comboName: string;
-  onComboSelect?: (value: number) => void;
-};
-
 export const CustomComboBox: FC<CustomComboBoxProps> = (props) => {
-  const { comboOptions, comboName, onComboSelect } = props;
+  const { comboOptions, comboName, defaultOption, onComboSelect } = props;
+  const [comboOptionSelected, setComboOptionSelected] = useState<string>(
+    `${defaultOption} X ${defaultOption}`
+  );
+
+  const [comboExpandStyle, setComboExpandStyle] =
+    useState<customComboExpandProps>({
+      arrowStyle: "",
+      optionsContainerStyle: "",
+    });
 
   const comboExpand = () => {
-    var isComboBoxExpanded = document.getElementById("expandComboBoxArrow")!
-      .className!;
-    var currentComboBoxClass = document.getElementById("expandComboBoxArrow");
-    var currentOptionsContainerClass =
-      document.getElementById("optionsContainer");
+    let updatedStyle: customComboExpandProps =
+      comboExpandStyle.arrowStyle === ""
+        ? {
+            arrowStyle: "comboBoxArrowExpanded",
+            optionsContainerStyle: "optionsContainerActive",
+          }
+        : { arrowStyle: "", optionsContainerStyle: "" };
 
-    if (isComboBoxExpanded) {
-      currentOptionsContainerClass!.className = styles.optionsContainer;
-      currentComboBoxClass!.className = "";
-    } else {
-      currentOptionsContainerClass!.className = styles.optionsContainerActive;
-      currentComboBoxClass!.className = styles.comboBoxArrowExpanded;
-    }
+    setComboExpandStyle(updatedStyle);
   };
 
   const optionSelected = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     let selectedValue = e.currentTarget.innerText;
-
-    document.querySelector("#comboValue")!.innerHTML =
-      comboName.split("3")[0] + selectedValue;
-
+    setComboOptionSelected(selectedValue);
     onComboSelect!(parseInt(selectedValue.split("X")[0]));
 
-    var currentComboBoxClass = document.getElementById("expandComboBoxArrow");
-    var currentOptionsContainerClass =
-      document.getElementById("optionsContainer");
-
-    currentOptionsContainerClass!.className = styles.optionsContainer;
-    currentComboBoxClass!.className = "";
+    setComboExpandStyle({
+      arrowStyle: "",
+      optionsContainerStyle: "",
+    });
   };
 
   return (
     <div className={styles.selectBox}>
-      <div id="optionsContainer" className={styles.optionsContainer}>
-        {comboOptions.map(function (comboOption: any, i: any) {
+      <div
+        id="optionsContainer"
+        className={`${styles.optionsContainer} ${
+          styles[`${comboExpandStyle.optionsContainerStyle}`]
+        }`}
+      >
+        {comboOptions.map(function (comboOption: number, i: number) {
           return (
             <div
               id="option"
@@ -67,10 +67,17 @@ export const CustomComboBox: FC<CustomComboBoxProps> = (props) => {
         className={styles.selected}
         onClick={() => comboExpand()}
       >
-        <span id="comboValue" className={styles.comboValue}>
-          {comboName}
+        <span className={styles.comboValue}>
+          {comboName} : {comboOptionSelected}
         </span>
-        <img src={arrowDropDown} alt="combo expand" id="expandComboBoxArrow" />
+        <img
+          src={arrowDropDown}
+          alt="combo expand"
+          className={`${styles.comboBoxArrow} ${
+            styles[`${comboExpandStyle.arrowStyle}`]
+          }`}
+          id="expandComboBoxArrow"
+        />
       </div>
     </div>
   );

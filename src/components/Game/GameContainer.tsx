@@ -4,8 +4,8 @@ import { GameWinnerInfo } from "./GameWinnerInfo";
 import { GameSquareBlock } from "./GameSquareBlock";
 import { GamePlayerType } from "./types";
 import { calculateWinner } from "./helpers";
-import styles from "./Game.module.css";
 import { GAMEDATA_LOCAL_STORAGE } from "../../constants";
+import styles from "./Game.module.css";
 
 export const GameContainer: FC = () => {
   const [gridSize, setGridSize] = useState<number>(3);
@@ -64,7 +64,8 @@ export const GameContainer: FC = () => {
         </div>
         <CustomComboBox
           comboOptions={gridSizeOptions}
-          comboName="Grid Size : 3 X 3"
+          comboName="Grid Size"
+          defaultOption={gridSizeOptions[0]}
           onComboSelect={handleGridSizeSelect}
         ></CustomComboBox>
         <div className={styles.gameData}>
