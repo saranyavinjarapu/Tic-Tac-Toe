@@ -9,7 +9,9 @@ export const GameWinnerInfo: FC<GameWinnerInfoProps> = (props) => {
     <>
       {winner && winner !== "BOTH" && (
         <>
-          <p className={styles.gameWinner}>Congratulations {winner}</p>
+          <p className={styles.gameWinner}>
+            Congratulations <span>{winner}</span>
+          </p>
           <Confetti numberOfPieces={300} recycle={false} tweenDuration={5000} />
         </>
       )}

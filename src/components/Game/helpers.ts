@@ -1,4 +1,5 @@
 import { GamePlayerType } from "./types";
+import { GAMEDATA_LOCAL_STORAGE } from "../../constants";
 
 function generateWinningConditions(size: number) {
   let totalSquares: number = size * size;
@@ -54,6 +55,7 @@ export const calculateWinner = (
 ) => {
   let i: number, j: number;
   const winningConditions: number[][] = generateWinningConditions(gridSize);
+  let newGameData = GAMEDATA_LOCAL_STORAGE();
   for (i = 0; i < winningConditions.length; i++) {
     for (j = 0; j < winningConditions[i].length; j++) {
       if (
@@ -65,10 +67,20 @@ export const calculateWinner = (
             (val, index, arr) => squares[val] === squares[arr[0]]
           )
         ) {
+          if (squares[winningConditions[i][j]] === "X")
+            newGameData.X = newGameData.X + 1;
+          else if (squares[winningConditions[i][j]] === "O")
+            newGameData.O = newGameData.O + 1;
+          localStorage.setItem("game-data", JSON.stringify(newGameData));
           return squares[winningConditions[i][j]];
         }
       }
     }
+  }
+  const newSquares = squares.filter(Boolean);
+  if (newSquares.length === squares.length) {
+    newGameData.BOTH = newGameData.BOTH + 1;
+    localStorage.setItem("game-data", JSON.stringify(newGameData));
   }
   return null;
 };

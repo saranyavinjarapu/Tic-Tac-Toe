@@ -5,9 +5,12 @@ import { GameSquareBlock } from "./GameSquareBlock";
 import { GamePlayerType } from "./types";
 import { calculateWinner } from "./helpers";
 import styles from "./Game.module.css";
+import { GAMEDATA_LOCAL_STORAGE } from "../../constants";
 
 export const GameContainer: FC = () => {
   const [gridSize, setGridSize] = useState<number>(3);
+
+  const gameData = GAMEDATA_LOCAL_STORAGE();
 
   const [gameSquares, setGameSquares] = useState(
     Array(gridSize * gridSize).fill(null)
@@ -64,6 +67,12 @@ export const GameContainer: FC = () => {
           comboName="Grid Size : 3 X 3"
           onComboSelect={handleGridSizeSelect}
         ></CustomComboBox>
+        <div className={styles.gameData}>
+          <b style={{ border: "none", transform: "scaleY(1.3)" }}>WINS :</b>
+          <b> X = {gameData.X}</b>
+          <b> O = {gameData.O} </b>
+          <b>TIE = {gameData.BOTH}</b>
+        </div>
         <button className={styles.resetButton} onClick={resetGame}>
           Reset
         </button>
