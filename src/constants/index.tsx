@@ -7,7 +7,7 @@ export const GAMEDATA_LOCAL_STORAGE = () => {
     return {
       X: 0,
       O: 0,
-      BOTH: 0,
+      BOTH: 0
     } as GameDataStorageType;
   }
   return JSON.parse(

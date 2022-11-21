@@ -1,16 +1,17 @@
 import { FC } from "react";
-import { GameWinnerInfoProps } from "./types";
 import Confetti from "react-confetti";
+import { GameWinnerInfoProps } from "./types";
 import styles from "./Game.module.css";
 
-export const GameWinnerInfo: FC<GameWinnerInfoProps> = (props) => {
+const GameWinnerInfo: FC<GameWinnerInfoProps> = (props) => {
   const { winner } = props;
   return (
     <>
       {winner && winner !== "BOTH" && (
         <>
           <p className={styles.gameWinner}>
-            Congratulations <span>{winner}</span>
+            Congratulations
+            <span>{winner}</span>
           </p>
           <Confetti numberOfPieces={300} recycle={false} tweenDuration={5000} />
         </>
@@ -18,7 +19,7 @@ export const GameWinnerInfo: FC<GameWinnerInfoProps> = (props) => {
       {winner && winner === "BOTH" && (
         <>
           <p className={styles.gameWinner}>
-            Congratulations you're both winners
+            Congratulations you are both winners
           </p>
           <Confetti numberOfPieces={300} recycle={false} tweenDuration={5000} />
         </>
@@ -26,3 +27,4 @@ export const GameWinnerInfo: FC<GameWinnerInfoProps> = (props) => {
     </>
   );
 };
+export default GameWinnerInfo;

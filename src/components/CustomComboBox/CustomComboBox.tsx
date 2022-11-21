@@ -1,9 +1,9 @@
-import { FC, useState } from "react";
+import React, { FC, useState } from "react";
 import styles from "./CustomComboBox.module.css";
 import { CustomComboBoxProps, customComboExpandProps } from "./types";
 import arrowDropDown from "../../icons/arrow.svg";
 
-export const CustomComboBox: FC<CustomComboBoxProps> = (props) => {
+const CustomComboBox: FC<CustomComboBoxProps> = (props) => {
   const { comboOptions, comboName, defaultOption, onComboSelect } = props;
   const [comboOptionSelected, setComboOptionSelected] = useState<string>(
     `${defaultOption} X ${defaultOption}`
@@ -12,15 +12,15 @@ export const CustomComboBox: FC<CustomComboBoxProps> = (props) => {
   const [comboExpandStyle, setComboExpandStyle] =
     useState<customComboExpandProps>({
       arrowStyle: "",
-      optionsContainerStyle: "",
+      optionsContainerStyle: ""
     });
 
   const comboExpand = () => {
-    let updatedStyle: customComboExpandProps =
+    const updatedStyle: customComboExpandProps =
       comboExpandStyle.arrowStyle === ""
         ? {
             arrowStyle: "comboBoxArrowExpanded",
-            optionsContainerStyle: "optionsContainerActive",
+            optionsContainerStyle: "optionsContainerActive"
           }
         : { arrowStyle: "", optionsContainerStyle: "" };
 
@@ -28,43 +28,40 @@ export const CustomComboBox: FC<CustomComboBoxProps> = (props) => {
   };
 
   const optionSelected = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    let selectedValue = e.currentTarget.innerText;
+    const selectedValue = e.currentTarget.innerText;
     setComboOptionSelected(selectedValue);
-    onComboSelect!(parseInt(selectedValue.split("X")[0]));
+    onComboSelect!(Number(selectedValue.split("X")[0]));
 
     setComboExpandStyle({
       arrowStyle: "",
-      optionsContainerStyle: "",
+      optionsContainerStyle: ""
     });
   };
 
   return (
     <div className={styles.selectBox}>
       <div
-        id="optionsContainer"
         className={`${styles.optionsContainer} ${
           styles[`${comboExpandStyle.optionsContainerStyle}`]
         }`}
       >
-        {comboOptions.map(function (comboOption: number, i: number) {
-          return (
-            <div
-              id="option"
-              key={i}
-              className={styles.option}
-              onClick={(e) => optionSelected(e)}
-            >
-              <input type="radio" className={styles.radio} name="combo-input" />
-              <label>
-                {comboOption} X {comboOption}
-              </label>
-            </div>
-          );
-        })}
+        {comboOptions.map((comboOption: number) => (
+          <div
+            key={comboOption}
+            role="presentation"
+            className={styles.option}
+            onClick={(e) => optionSelected(e)}
+          >
+            <input type="radio" className={styles.radio} name="combo-input" />
+            <label htmlFor="combo-option">
+              {comboOption} X {comboOption}
+            </label>
+          </div>
+        ))}
       </div>
       <div
-        id="selected"
         className={styles.selected}
+        role="presentation"
         onClick={() => comboExpand()}
       >
         <span className={styles.comboValue}>
@@ -76,9 +73,10 @@ export const CustomComboBox: FC<CustomComboBoxProps> = (props) => {
           className={`${styles.comboBoxArrow} ${
             styles[`${comboExpandStyle.arrowStyle}`]
           }`}
-          id="expandComboBoxArrow"
         />
       </div>
     </div>
   );
 };
+
+export default CustomComboBox;

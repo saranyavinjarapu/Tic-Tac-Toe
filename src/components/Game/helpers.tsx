@@ -1,31 +1,34 @@
 import { GamePlayerType } from "./types";
 import { GAMEDATA_LOCAL_STORAGE } from "../../constants";
-import { setLocalStorage } from "../../utils";
+import setLocalStorage from "../../utils";
 
 function generateWinningConditions(size: number) {
-  let totalSquares: number = size * size;
-  let winningSquares: any = new Array(size * 2);
+  const totalSquares: number = size * size;
+  const winningSquares: any = new Array(size * 2);
 
-  let diagonalOneCheck: string = "",
-    diagonalTwoCheck: string = "";
-  let diagonalOneCheckArray: string[] = [],
-    diagonalTwoCheckArray: string[] = [];
+  let diagonalOneCheck: string = "";
+  let diagonalTwoCheck: string = "";
+  let diagonalOneCheckArray: string[] = [];
+  let diagonalTwoCheckArray: string[] = [];
 
-  let i: number, j: number, k: number;
-  let horizontalMoves: string[], verticalMoves: string[];
+  let i: number;
+  let j: number;
+  let k: number;
+  let horizontalMoves: string[];
+  let verticalMoves: string[];
 
-  for (i = 0; i < size; i++) {
+  for (i = 0; i < size; i += 1) {
     let horizontalCheck: string = "";
     let verticalCheck: string = "";
-    for (j = 0; j < totalSquares; j++) {
+    for (j = 0; j < totalSquares; j += 1) {
       if (j / size === i) {
-        horizontalCheck += j + ",";
-        for (k = 1; k < size; k++) {
-          horizontalCheck += j + k + ",";
+        horizontalCheck += `${j},`;
+        for (k = 1; k < size; k += 1) {
+          horizontalCheck += `${j + k},`;
         }
       }
       if (j % size === i) {
-        verticalCheck += j + ",";
+        verticalCheck += `${j},`;
       }
     }
     horizontalCheck = horizontalCheck.substring(0, horizontalCheck.length - 1);
@@ -36,8 +39,8 @@ function generateWinningConditions(size: number) {
     winningSquares[i] = verticalMoves;
     winningSquares[i + size] = horizontalMoves;
 
-    diagonalOneCheck += i * (size + 1) + ",";
-    diagonalTwoCheck += (i + 1) * (size - 1) + ",";
+    diagonalOneCheck += `${i * (size + 1)},`;
+    diagonalTwoCheck += `${(i + 1) * (size - 1)},`;
   }
   diagonalOneCheck = diagonalOneCheck.substring(0, diagonalOneCheck.length - 1);
   diagonalOneCheckArray = diagonalOneCheck.split(",");
@@ -50,15 +53,13 @@ function generateWinningConditions(size: number) {
   const winningCondition: number[][] = winningSquares;
   return winningCondition;
 }
-export const calculateWinner = (
-  squares: GamePlayerType[],
-  gridSize: number
-) => {
-  let i: number, j: number;
+const calculateWinner = (squares: GamePlayerType[], gridSize: number) => {
+  let i: number;
+  let j: number;
   const winningConditions: number[][] = generateWinningConditions(gridSize);
-  let newGameData = GAMEDATA_LOCAL_STORAGE();
-  for (i = 0; i < winningConditions.length; i++) {
-    for (j = 0; j < winningConditions[i].length; j++) {
+  const newGameData = GAMEDATA_LOCAL_STORAGE();
+  for (i = 0; i < winningConditions.length; i += 1) {
+    for (j = 0; j < winningConditions[i].length; j += 1) {
       if (
         squares[winningConditions[i][j]] &&
         squares[winningConditions[i][j]]
@@ -68,10 +69,8 @@ export const calculateWinner = (
             (val, index, arr) => squares[val] === squares[arr[0]]
           )
         ) {
-          if (squares[winningConditions[i][j]] === "X")
-            newGameData.X = newGameData.X + 1;
-          else if (squares[winningConditions[i][j]] === "O")
-            newGameData.O = newGameData.O + 1;
+          if (squares[winningConditions[i][j]] === "X") newGameData.X += 1;
+          else if (squares[winningConditions[i][j]] === "O") newGameData.O += 1;
 
           setLocalStorage(newGameData);
           return squares[winningConditions[i][j]];
@@ -81,9 +80,11 @@ export const calculateWinner = (
   }
   const newSquares = squares.filter(Boolean);
   if (newSquares.length === squares.length) {
-    newGameData.BOTH = newGameData.BOTH + 1;
+    newGameData.BOTH += 1;
 
     setLocalStorage(newGameData);
   }
   return null;
 };
+
+export default calculateWinner;

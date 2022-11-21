@@ -1,13 +1,13 @@
 import { useState, useEffect, FC } from "react";
-import { CustomComboBox } from "../CustomComboBox/CustomComboBox";
-import { GameWinnerInfo } from "./GameWinnerInfo";
-import { GameSquareBlock } from "./GameSquareBlock";
+import CustomComboBox from "../CustomComboBox/CustomComboBox";
+import GameWinnerInfo from "./GameWinnerInfo";
+import GameSquareBlock from "./GameSquareBlock";
 import { GamePlayerType } from "./types";
-import { calculateWinner } from "./helpers";
+import calculateWinner from "./helpers";
 import { GAMEDATA_LOCAL_STORAGE } from "../../constants";
 import styles from "./Game.module.css";
 
-export const GameContainer: FC = () => {
+const GameContainer: FC = () => {
   const [gridSize, setGridSize] = useState<number>(3);
 
   const gameData = GAMEDATA_LOCAL_STORAGE();
@@ -21,7 +21,7 @@ export const GameContainer: FC = () => {
   );
   const gridSizeOptions: number[] = [3, 4, 5, 6];
 
-  const resetGame = (e?: React.MouseEvent<HTMLButtonElement>) => {
+  const resetGame = () => {
     setGameSquares(Array(gridSize * gridSize).fill(null));
     setWinner(null);
     setCurrentPlayer(Math.round(Math.random() * 1) === 1 ? "X" : "O");
@@ -38,9 +38,9 @@ export const GameContainer: FC = () => {
     setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
   };
 
-  const handleGridSizeSelect = (gridSize: number) => {
-    setGridSize(gridSize);
-    setGameSquares(Array(gridSize * gridSize).fill(null));
+  const handleGridSizeSelect = (gridSizeValue: number) => {
+    setGridSize(gridSizeValue);
+    setGameSquares(Array(gridSizeValue * gridSizeValue).fill(null));
     setWinner(null);
     setCurrentPlayer(Math.round(Math.random() * 1) === 1 ? "X" : "O");
   };
@@ -67,14 +67,18 @@ export const GameContainer: FC = () => {
           comboName="Grid Size"
           defaultOption={gridSizeOptions[0]}
           onComboSelect={handleGridSizeSelect}
-        ></CustomComboBox>
+        />
         <div className={styles.gameData}>
           <b style={{ border: "none", transform: "scaleY(1.3)" }}>WINS :</b>
           <b> X = {gameData.X}</b>
-          <b> O = {gameData.O} </b>
+          <b> O = {gameData.O}</b>
           <b>TIE = {gameData.BOTH}</b>
         </div>
-        <button className={styles.resetButton} onClick={resetGame}>
+        <button
+          type="button"
+          className={styles.resetButton}
+          onClick={resetGame}
+        >
           Reset
         </button>
       </div>
@@ -82,32 +86,32 @@ export const GameContainer: FC = () => {
       <div className={styles.gamePlaySection}>
         {!winner ? (
           <p className={styles.showPlayerTurn}>
-            Hey {currentPlayer}, it's your turn
+            Hey {currentPlayer}, it is your turn
           </p>
         ) : (
-          <GameWinnerInfo winner={winner}></GameWinnerInfo>
+          <GameWinnerInfo winner={winner} />
         )}
 
         <div
           className={styles.gameGrid}
           style={{
-            gridTemplateColumns: `repeat(${gridSize},1fr`,
+            gridTemplateColumns: `repeat(${gridSize},1fr`
           }}
         >
           {Array(gridSize * gridSize)
             .fill(null)
-            .map((_, i) => {
-              return (
-                <GameSquareBlock
-                  winner={winner}
-                  key={i}
-                  onClick={() => handleGameSquareInput(i)}
-                  value={gameSquares[i]}
-                />
-              );
-            })}
+            .map((_, i) => (
+              <GameSquareBlock
+                winner={winner}
+                key={i} // eslint-disable-line
+                onClick={() => handleGameSquareInput(i)}
+                value={gameSquares[i]}
+              />
+            ))}
         </div>
       </div>
     </div>
   );
 };
+
+export default GameContainer;
