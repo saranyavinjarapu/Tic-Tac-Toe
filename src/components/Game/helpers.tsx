@@ -81,8 +81,8 @@ const calculateWinner = (squares: GamePlayerType[], gridSize: number) => {
   const newSquares = squares.filter(Boolean);
   if (newSquares.length === squares.length) {
     newGameData.BOTH += 1;
-
     setLocalStorage(newGameData);
+    return "BOTH";
   }
   return null;
 };

@@ -50,10 +50,6 @@ const GameContainer: FC = () => {
     if (winnerValue) {
       setWinner(winnerValue);
     }
-
-    if (!winnerValue && !gameSquares.filter((square) => !square).length) {
-      setWinner("BOTH");
-    }
   }, [gameSquares, gridSize, setWinner]);
 
   return (

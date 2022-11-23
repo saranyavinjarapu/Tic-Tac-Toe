@@ -30,7 +30,7 @@ const CustomComboBox: FC<CustomComboBoxProps> = (props) => {
   const optionSelected = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const selectedValue = e.currentTarget.innerText;
     setComboOptionSelected(selectedValue);
-    onComboSelect!(Number(selectedValue.split("X")[0]));
+    onComboSelect(Number(selectedValue.split("X")[0]));
 
     setComboExpandStyle({
       arrowStyle: "",

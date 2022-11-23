@@ -29,6 +29,41 @@
   margin-top: -10px;
 }
 
+.gameData {
+  background: #0d141fb3;
+  border-radius: 8px;
+  color: #f5f6f8;
+  min-width: 130px;
+  display: flex;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.gameData b {
+  border: 2px solid #00b96c;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 7px;
+  border-radius: 4px;
+}
+
+.resetButton {
+  align-items: center;
+  border-radius: 0.75rem;
+  background-color: #00b96c;
+  padding: 0.8rem 2rem;
+  justify-content: center;
+  border: none;
+  color: #fff;
+  font-size: 27px;
+  line-height: 1.2;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
 .gamePlaySection {
   display: flex;
   flex-direction: column;
@@ -74,21 +109,6 @@
   width: 70px;
 }
 
-.resetButton {
-  align-items: center;
-  border-radius: 0.75rem;
-  background-color: #00b96c;
-  padding: 0.8rem 2rem;
-  justify-content: center;
-  border: none;
-  color: #fff;
-  font-size: 27px;
-  line-height: 1.2;
-  font-weight: 600;
-  text-align: center;
-  letter-spacing: 0.02em;
-}
-
 .showPlayerTurn {
   font-weight: 600;
   font-size: 25px;
@@ -114,24 +134,4 @@
 }
 .gameWinner span {
   font-size: 30px;
-}
-
-.gameData {
-  background: #0d141fb3;
-  border-radius: 8px;
-  color: #f5f6f8;
-  min-width: 130px;
-  display: flex;
-  padding: 15px;
-  font-size: 20px;
-  font-weight: 600;
-  text-align: center;
-}
-
-.gameData b {
-  border: 2px solid #00b96c;
-  margin-left: 5px;
-  margin-right: 5px;
-  padding: 7px;
-  border-radius: 4px;
 }
