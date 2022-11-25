@@ -1,7 +1,12 @@
+export type CustomComboOptionsType = {
+  label: string;
+  value: number;
+};
+
 export type CustomComboBoxProps = {
-  comboOptions: Array<number>;
+  comboOptions: CustomComboOptionsType[];
   comboName: string;
-  defaultOption: number;
+  defaultOption: string;
   onComboSelect: (value: number) => void;
 };
 

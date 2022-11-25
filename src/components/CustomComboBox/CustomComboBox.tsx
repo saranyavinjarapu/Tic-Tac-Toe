@@ -1,13 +1,16 @@
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import styles from "./CustomComboBox.module.css";
-import { CustomComboBoxProps, customComboExpandProps } from "./types";
+import {
+  CustomComboBoxProps,
+  CustomComboOptionsType,
+  customComboExpandProps
+} from "./types";
 import arrowDropDown from "../../icons/arrow.svg";
 
 const CustomComboBox: FC<CustomComboBoxProps> = (props) => {
   const { comboOptions, comboName, defaultOption, onComboSelect } = props;
-  const [comboOptionSelected, setComboOptionSelected] = useState<string>(
-    `${defaultOption} X ${defaultOption}`
-  );
+  const [comboOptionSelectedLabel, setComboOptionSelectedLabel] =
+    useState<string>(`${defaultOption}`);
 
   const [comboExpandStyle, setComboExpandStyle] =
     useState<customComboExpandProps>({
@@ -27,10 +30,12 @@ const CustomComboBox: FC<CustomComboBoxProps> = (props) => {
     setComboExpandStyle(updatedStyle);
   };
 
-  const optionSelected = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const selectedValue = e.currentTarget.innerText;
-    setComboOptionSelected(selectedValue);
-    onComboSelect(Number(selectedValue.split("X")[0]));
+  const optionSelected = (
+    optionSelectedvalue: number,
+    optionSelectedLabel: string
+  ) => {
+    onComboSelect(Number(optionSelectedvalue));
+    setComboOptionSelectedLabel(optionSelectedLabel);
 
     setComboExpandStyle({
       arrowStyle: "",
@@ -45,17 +50,20 @@ const CustomComboBox: FC<CustomComboBoxProps> = (props) => {
           styles[`${comboExpandStyle.optionsContainerStyle}`]
         }`}
       >
-        {comboOptions.map((comboOption: number) => (
+        {comboOptions.map((comboOption: CustomComboOptionsType) => (
           <div
-            key={comboOption}
+            key={comboOption.value}
             role="presentation"
             className={styles.option}
-            onClick={(e) => optionSelected(e)}
+            onClick={() => optionSelected(comboOption.value, comboOption.label)}
           >
-            <input type="radio" className={styles.radio} name="combo-input" />
-            <label htmlFor="combo-option">
-              {comboOption} X {comboOption}
-            </label>
+            <input
+              type="radio"
+              value={comboOption.value}
+              className={styles.radio}
+              name="combo-input"
+            />
+            <label htmlFor="combo-option">{comboOption.label}</label>
           </div>
         ))}
       </div>
@@ -65,7 +73,7 @@ const CustomComboBox: FC<CustomComboBoxProps> = (props) => {
         onClick={() => comboExpand()}
       >
         <span className={styles.comboValue}>
-          {comboName} : {comboOptionSelected}
+          {comboName} : {comboOptionSelectedLabel}
         </span>
         <img
           src={arrowDropDown}

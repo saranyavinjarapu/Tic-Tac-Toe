@@ -5,6 +5,7 @@ import GameSquareBlock from "./GameSquareBlock";
 import { GamePlayerType } from "./types";
 import calculateWinner from "./helpers";
 import { GAMEDATA_LOCAL_STORAGE } from "../../constants";
+import gridSizeOptions from "../../data";
 import styles from "./Game.module.css";
 
 const GameContainer: FC = () => {
@@ -19,7 +20,6 @@ const GameContainer: FC = () => {
   const [currentPlayer, setCurrentPlayer] = useState<"X" | "O">(
     Math.round(Math.random() * 1) === 1 ? "X" : "O"
   );
-  const gridSizeOptions: number[] = [3, 4, 5, 6];
 
   const resetGame = () => {
     setGameSquares(Array(gridSize * gridSize).fill(null));
@@ -61,7 +61,7 @@ const GameContainer: FC = () => {
         <CustomComboBox
           comboOptions={gridSizeOptions}
           comboName="Grid Size"
-          defaultOption={gridSizeOptions[0]}
+          defaultOption="3 X 3"
           onComboSelect={handleGridSizeSelect}
         />
         <div className={styles.gameData}>
