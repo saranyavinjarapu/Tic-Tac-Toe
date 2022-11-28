@@ -4,14 +4,14 @@ import GameWinnerInfo from "./GameWinnerInfo";
 import GameSquareBlock from "./GameSquareBlock";
 import { GamePlayerType } from "./types";
 import calculateWinner from "./helpers";
-import { GAMEDATA_LOCAL_STORAGE } from "../../constants";
+import { getGameDataLocalStorage } from "../../utils";
 import gridSizeOptions from "../../data";
 import styles from "./Game.module.css";
 
 const GameContainer: FC = () => {
   const [gridSize, setGridSize] = useState<number>(3);
 
-  const gameData = GAMEDATA_LOCAL_STORAGE();
+  const gameData = getGameDataLocalStorage();
 
   const [gameSquares, setGameSquares] = useState(
     Array(gridSize * gridSize).fill(null)
