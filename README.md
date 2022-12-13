@@ -1,16 +1,12 @@
 # React-tac-toe
 
-## Build something like this!
+[Tic-tac-toe Game]
 
-![Tic-tac-toe Game](https://github.com/grain-team/tic-tac-toe/blob/master/objective.png?raw=true)
-
-# Extra points
-
-- Use TypeScript
-- Make it look nice
-- Add modern tooling of your choice (linter, formatter, etc)
-- Save game data to LocalStorage
+- Uses React,TypeScript
+- Saves game data to LocalStorage
 - Add a controller to change the grid size (3x3, 4x4, 5x5 or 6x6)
+- It can work for nxn grid
+- Added eslint, prettier
 
 ## Available Scripts
 
